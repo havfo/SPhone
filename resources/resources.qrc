@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/call-start.svg</file>
+        <file>icons/chat-start.svg</file>
+        <file>icons/contact-new.svg</file>
+    </qresource>
+</RCC>
