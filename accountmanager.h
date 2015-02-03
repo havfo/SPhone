@@ -8,14 +8,16 @@
 class AccountManager {
 
 public:
-    AccountManager();
+    AccountManager(QWidget *parent = 0);
     bool addAccount(SAccount *account);
     SAccount* getAccount(int id);
     SAccount* getAccount(QString sipUri);
     void deleteAccount(SAccount *account);
+    QList<SAccount *> getAccounts();
 
 private:
     QList<SAccount *> accounts;
+    QWidget *parent;
 
 };
 

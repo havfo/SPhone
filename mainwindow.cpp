@@ -32,7 +32,10 @@ void MainWindow::startApplication() {
         std::cout << "Startup error: " << err.info() << std::endl;
     }
 
-    am = new AccountManager;
+    am = new AccountManager(this);
+}
+
+void MainWindow::onIncomingCall(OnIncomingCallParam &incomingCall) {
 
 }
 

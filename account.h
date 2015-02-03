@@ -2,6 +2,7 @@
 #define ACCOUNT_H
 
 #include <pjsua2.hpp>
+#include <QObject>
 
 using namespace pj;
 

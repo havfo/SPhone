@@ -7,7 +7,6 @@
 #include "accountmanager.h"
 #include "preferences.h"
 
-
 namespace Ui {
 class MainWindow;
 }
@@ -21,6 +20,7 @@ protected:
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void onIncomingCall(OnIncomingCallParam &incomingCall);
 
 private:
     Ui::MainWindow *ui;
@@ -46,6 +46,7 @@ private slots:
     void on_preferences_action_triggered();
     void on_addcontact_button_clicked();
     void on_backtocontacts_button_clicked();
+
 };
 
 #endif // MAINWINDOW_H

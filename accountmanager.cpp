@@ -1,16 +1,12 @@
 #include "accountmanager.h"
 
-AccountManager::AccountManager() {
-
-
-
+AccountManager::AccountManager(QWidget *parent) {
+    this->parent = parent;
 }
 
 bool AccountManager::addAccount(SAccount *account) {
     accounts << account;
 }
-
-
 
 SAccount *AccountManager::getAccount(int id) {
     return accounts.at(id);
@@ -43,4 +39,8 @@ void AccountManager::deleteAccount(SAccount *account) {
             break;
         }
     }
+}
+
+QList<SAccount *> AccountManager::getAccounts() {
+    return accounts;
 }

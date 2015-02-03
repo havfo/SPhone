@@ -15,6 +15,10 @@ public:
     explicit AccountWizard(QWidget *parent = 0);
     ~AccountWizard();
 
+private slots:
+    void on_buttonBox_rejected();
+    void on_buttonBox_accepted();
+
 private:
     Ui::AccountWizard *ui;
 };
