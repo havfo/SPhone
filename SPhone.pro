@@ -17,17 +17,20 @@ SOURCES += main.cpp\
     account.cpp \
     accountmanager.cpp \
     buddy.cpp \
-    preferences.cpp
+    preferences.cpp \
+    accountwizard.cpp
 
 HEADERS  += mainwindow.h \
     account.h \
     accountmanager.h \
     buddy.h \
-    preferences.h
+    preferences.h \
+    accountwizard.h
 
 FORMS    += resources/mainwindow.ui \
     resources/preferences.ui \
-    resources/preferences.ui
+    resources/preferences.ui \
+    resources/accountwizard.ui
 
 RESOURCES += \
     resources/resources.qrc

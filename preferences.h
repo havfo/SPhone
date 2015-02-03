@@ -2,6 +2,7 @@
 #define PREFERENCES_H
 
 #include <QDialog>
+#include <accountmanager.h>
 
 namespace Ui {
 class Preferences;
@@ -11,7 +12,7 @@ class Preferences : public QDialog {
     Q_OBJECT
 
 public:
-    explicit Preferences(QWidget *parent = 0);
+    explicit Preferences(QWidget *parent = 0, AccountManager *am = 0);
     ~Preferences();
 
 private slots:
@@ -24,6 +25,7 @@ private slots:
 
 private:
     Ui::Preferences *ui;
+    AccountManager *am;
 };
 
 #endif // PREFERENCES_H

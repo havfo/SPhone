@@ -44,10 +44,6 @@ void MainWindow::on_chat_button_clicked() {
 
 }
 
-void MainWindow::on_addContact_button_clicked() {
-
-}
-
 void MainWindow::on_searchBox_textEdited(const QString &searchString) {
     // std::cout << "String typed: " << searchString.toStdString() << std::endl;
 
@@ -77,12 +73,13 @@ void MainWindow::on_quit_action_triggered() {
 }
 
 void MainWindow::on_preferences_action_triggered() {
-    p = new Preferences(this);
+    p = new Preferences(this, am);
 
     int returnCode = p->exec();
 
     if (returnCode == QDialog::Accepted) {
-        std::cout << "Accepted" << std::endl;
+
+        // Do some setting up of account stuff
     }
 }
 
@@ -109,6 +106,10 @@ bool MainWindow::reallyExit() {
     }
 }
 
-void MainWindow::on_pushButton_clicked() {
+void MainWindow::on_addcontact_button_clicked() {
+
+}
+
+void MainWindow::on_backtocontacts_button_clicked() {
     ui->stackedWidget->setCurrentIndex(0);
 }

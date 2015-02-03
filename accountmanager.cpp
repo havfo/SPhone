@@ -17,7 +17,15 @@ SAccount *AccountManager::getAccount(int id) {
 }
 
 SAccount *AccountManager::getAccount(QString sipUri) {
+    SAccount *account;
 
+    for (int i=0; i<accounts.size(); i++) {
+        account = accounts.at(i);
+        if (sipUri.trimmed().toStdString() == account->getInfo().uri) {
+            return account;
+        }
+    }
+    return 0;
 }
 
 void AccountManager::deleteAccount(SAccount *account) {

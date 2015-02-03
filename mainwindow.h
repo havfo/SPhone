@@ -37,7 +37,6 @@ private:
 private slots:
     void on_call_button_clicked();
     void on_chat_button_clicked();
-    void on_addContact_button_clicked();
     void on_searchBox_textEdited(const QString &searchString);
     void on_userAvailability_currentIndexChanged(int index);
     void on_userLocation_returnPressed();
@@ -45,7 +44,8 @@ private slots:
     void on_accountSelector_currentIndexChanged(int index);
     void on_quit_action_triggered();
     void on_preferences_action_triggered();
-    void on_pushButton_clicked();
+    void on_addcontact_button_clicked();
+    void on_backtocontacts_button_clicked();
 };
 
 #endif // MAINWINDOW_H
