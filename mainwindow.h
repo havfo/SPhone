@@ -24,8 +24,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    AccountManager accountManager;
+    AccountManager *am;
     Endpoint *ep;
+    QList<Buddy *> buddies;
     void startApplication();
     void loadSettings();
     void saveSettings();

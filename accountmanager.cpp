@@ -7,12 +7,12 @@ AccountManager::AccountManager()
 
 }
 
-bool AccountManager::addAccount(SPhoneAccount &account)
+bool AccountManager::addAccount(SAccount &account)
 {
 
 }
 
-SPhoneAccount &AccountManager::getAccount(int id)
+SAccount &AccountManager::getAccount(int id)
 {
 
 }

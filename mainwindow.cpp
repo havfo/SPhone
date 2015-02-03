@@ -32,6 +32,9 @@ void MainWindow::startApplication()
     } catch(Error& err) {
         std::cout << "Startup error: " << err.info() << std::endl;
     }
+
+    am = new AccountManager;
+
 }
 
 void MainWindow::on_call_button_clicked()

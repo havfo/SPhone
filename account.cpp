@@ -1,48 +1,48 @@
 #include "account.h"
 
-SPhoneAccount::SPhoneAccount()
+SAccount::SAccount()
 {
 
 
 
 }
 
-void SPhoneAccount::onIncomingCall(OnIncomingCallParam &incomingCall)
+void SAccount::onIncomingCall(OnIncomingCallParam &incomingCall)
 {
 
 }
 
-void SPhoneAccount::onRegStarted(OnRegStartedParam &regStarted)
+void SAccount::onRegStarted(OnRegStartedParam &regStarted)
 {
 
 }
 
-void SPhoneAccount::onIncomingSubscribe(OnIncomingSubscribeParam &subscribe)
+void SAccount::onIncomingSubscribe(OnIncomingSubscribeParam &subscribe)
 {
 
 }
 
-void SPhoneAccount::onInstantMessage(OnInstantMessageParam &instantMessage)
+void SAccount::onInstantMessage(OnInstantMessageParam &instantMessage)
 {
 
 }
 
-void SPhoneAccount::onInstantMessageStatus(OnInstantMessageStatusParam &instantMessageStatus)
+void SAccount::onInstantMessageStatus(OnInstantMessageStatusParam &instantMessageStatus)
 {
 
 }
 
-void SPhoneAccount::onTypingIndication(OnTypingIndicationParam &typingIndication)
+void SAccount::onTypingIndication(OnTypingIndicationParam &typingIndication)
 {
 
 }
 
-void SPhoneAccount::onMwiInfo(OnMwiInfoParam &mwiInfo)
+void SAccount::onMwiInfo(OnMwiInfoParam &mwiInfo)
 {
 
 }
 
-void SPhoneAccount::onRegState(OnRegStateParam &regState)
+void SAccount::onRegState(OnRegStateParam &regState)
 {
 
 }

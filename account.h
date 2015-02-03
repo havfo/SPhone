@@ -5,11 +5,11 @@
 
 using namespace pj;
 
-class SPhoneAccount : public Account
+class SAccount : public Account
 {
     // Account interface
 public:
-    SPhoneAccount();
+    SAccount();
     virtual void onIncomingCall(OnIncomingCallParam &incomingCall);
     virtual void onRegStarted(OnRegStartedParam &regStarted);
     virtual void onIncomingSubscribe(OnIncomingSubscribeParam &subscribe);

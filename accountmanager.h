@@ -9,11 +9,11 @@ class AccountManager
 
 public:
     AccountManager();
-    bool addAccount(SPhoneAccount &account);
-    SPhoneAccount& getAccount(int id);
+    bool addAccount(SAccount &account);
+    SAccount& getAccount(int id);
 
 private:
-    QList<SPhoneAccount *> accounts;
+    QList<SAccount *> accounts;
 
 };
 

@@ -15,11 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     account.cpp \
-    accountmanager.cpp
+    accountmanager.cpp \
+    buddy.cpp
 
 HEADERS  += mainwindow.h \
     account.h \
-    accountmanager.h
+    accountmanager.h \
+    buddy.h
 
 FORMS    += resources/mainwindow.ui
 
