@@ -16,14 +16,18 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     account.cpp \
     accountmanager.cpp \
-    buddy.cpp
+    buddy.cpp \
+    preferences.cpp
 
 HEADERS  += mainwindow.h \
     account.h \
     accountmanager.h \
-    buddy.h
+    buddy.h \
+    preferences.h
 
-FORMS    += resources/mainwindow.ui
+FORMS    += resources/mainwindow.ui \
+    resources/preferences.ui \
+    resources/preferences.ui
 
 RESOURCES += \
     resources/resources.qrc

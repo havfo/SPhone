@@ -1,10 +1,10 @@
 #include "buddy.h"
 
-SBuddy::SBuddy()
-{
+// account : The account this buddy belongs to
+SBuddy::SBuddy(SAccount *account) {
+    this->account = account;
 }
 
-void SBuddy::onBuddyState()
-{
+void SBuddy::onBuddyState() {
 
 }

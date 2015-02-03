@@ -5,9 +5,8 @@
 
 using namespace pj;
 
-class SAccount : public Account
-{
-    // Account interface
+class SAccount : public Account {
+
 public:
     SAccount();
     virtual void onIncomingCall(OnIncomingCallParam &incomingCall);
