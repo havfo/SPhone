@@ -1,10 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <pjsua2.hpp>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     startApplication();
-    addAccounts();
 }
 
 MainWindow::~MainWindow() {
@@ -12,19 +12,33 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::startApplication() {
+
+    loadSettings();
+
     try {
         ep = new Endpoint;
 
         ep->libCreate();
 
         EpConfig ep_cfg;
-        ep_cfg.logConfig.level = 1;
+        ep_cfg.logConfig.level = logLevel;
+        ep_cfg.logConfig.msgLogging = PJ_TRUE;
 
         ep->libInit(ep_cfg);
 
         TransportConfig tcfg;
-        tcfg.port = 5060;
+        tcfg.port = udpPort;
         tID = ep->transportCreate(PJSIP_TRANSPORT_UDP, tcfg);
+
+        tcfg.port = tcpPort;
+        tID = ep->transportCreate(PJSIP_TRANSPORT_TCP, tcfg);
+
+        TlsConfig tlcfg;
+        tlcfg.CaListFile = "resources/tls/ca.pem";
+        tlcfg.certFile = "resources/tls/cert.pem";
+        tlcfg.privKeyFile = "resources/tls/key.pem";
+        tcfg.port = tlsPort;
+        tID = ep->transportCreate(PJSIP_TRANSPORT_TLS, tcfg);
 
         ep->libStart();
     } catch(Error& err) {
@@ -32,32 +46,61 @@ void MainWindow::startApplication() {
     }
 
     am = new AccountManager();
+
+    addAccounts();
 }
 
-void MainWindow::onIncomingCall(SAccount *account, OnIncomingCallParam &incomingCall) {
+void MainWindow::loadSettings() {
+    QSettings settings("SPhone", "SPhone");
+
+    firstRun = (settings.value("first_run", "").toString().toStdString().empty());
+
+    if (firstRun) {
+        // Do something for first run
+        std::cout << "This is the first run of the application!" << std::endl;
+    } else {
+        std::cout << "This is not the first run of the application!" << std::endl;
+        logLevel = settings.value("logLevel", "5").toInt();
+        udpPort = settings.value("udpPort", "5060").toInt();
+        tcpPort = settings.value("tcpPort", "5060").toInt();
+        tlsPort = settings.value("tlsPort", "5061").toInt();
+    }
+}
+
+void MainWindow::loadAccountSettings() {
+
+}
+
+void MainWindow::saveSettings() {
+
+}
+
+void MainWindow::onIncomingCall(SAccount *account, const OnIncomingCallParam &incomingCall) {
     std::cout << "Incoming call!" << std::endl;
 }
 
-void MainWindow::onAccountRegisterState(SAccount *account, OnRegStateParam &regState) {
+void MainWindow::onRegState(SAccount *account, const OnRegStateParam &registrationState) {
     AccountInfo ai = account->getInfo();
     std::cout << (ai.regIsActive? "*** Register: code=" : "*** Unregister: code=")
-                 << regState.code << std::endl;
+                 << registrationState.code << std::endl;
 }
 
 void MainWindow::addAccounts() {
     AccountConfig acc_cfg;
     acc_cfg.idUri = "sip:test@example.com";
     acc_cfg.regConfig.registrarUri = "sip:example.com";
-    acc_cfg.sipConfig.proxies.push_back("sip:xxx.example.com");
-    acc_cfg.sipConfig.authCreds.push_back( AuthCredInfo("digest", "*", "username", 0, "password") );
+    acc_cfg.sipConfig.proxies.push_back("sip:sip.example.com;transport=tls");
+    acc_cfg.sipConfig.authCreds.push_back( AuthCredInfo("digest", "*", "test", 0, "password") );
 
     SAccount *acc = new SAccount;
 
     try {
         acc->create(acc_cfg);
 
+        qRegisterMetaType<OnRegStateParam>("OnRegStateParam");
+
         QObject::connect(acc, &SAccount::callIncoming, this, &MainWindow::onIncomingCall);
-        QObject::connect(acc, &SAccount::registerState, this, &MainWindow::onAccountRegisterState);
+        QObject::connect(acc, &SAccount::registerState, this, &MainWindow::onRegState);
 
         am->addAccount(acc);
     } catch(Error& err) {
@@ -115,8 +158,13 @@ void MainWindow::on_preferences_action_triggered() {
 
 void MainWindow::closeEvent(QCloseEvent *event) {
     if (reallyExit()) {
+        delete am;
+
         ep->libDestroy();
         delete ep;
+
+        saveSettings();
+
         event->accept();
     } else {
         event->ignore();

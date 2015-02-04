@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QCloseEvent>
+#include <QSettings>
 #include "accountmanager.h"
 #include "preferences.h"
 
@@ -32,11 +33,19 @@ private:
     TransportId tID;
     Preferences *p;
 
+    int logLevel;
+    int udpPort;
+    int tcpPort;
+    int tlsPort;
+
+    bool firstRun;
+
     void startApplication();
     void loadSettings();
     void saveSettings();
     bool reallyExit();
     void addAccounts();
+    void loadAccountSettings();
 
 private slots:
     void on_call_button_clicked();
@@ -52,8 +61,8 @@ private slots:
     void on_backtocontacts_button_clicked();
 
     // Slots for signals from accounts
-    void onIncomingCall(SAccount *account, OnIncomingCallParam &incomingCall);
-    void onAccountRegisterState(SAccount *account, OnRegStateParam &regState);
+    void onIncomingCall(SAccount *account, const OnIncomingCallParam &incomingCall);
+    void onRegState(SAccount *account, const OnRegStateParam &registrationState);
 };
 
 #endif // MAINWINDOW_H

@@ -21,11 +21,11 @@ private slots:
     virtual void onInstantMessageStatus(OnInstantMessageStatusParam &instantMessageStatus);
     virtual void onTypingIndication(OnTypingIndicationParam &typingIndication);
     virtual void onMwiInfo(OnMwiInfoParam &mwiInfo);
-    virtual void onRegState(OnRegStateParam &regState);
+    virtual void onRegState(OnRegStateParam &registrationState);
 
 signals:
-    void callIncoming(SAccount *account, OnIncomingCallParam &incomingCall);
-    void registerState(SAccount *account, OnRegStateParam &regState);
+    void callIncoming(SAccount *, const OnIncomingCallParam &);
+    void registerState(SAccount *, const OnRegStateParam &);
 };
 
 #endif // ACCOUNT_H

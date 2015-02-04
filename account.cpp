@@ -31,6 +31,6 @@ void SAccount::onMwiInfo(OnMwiInfoParam &mwiInfo) {
 
 }
 
-void SAccount::onRegState(OnRegStateParam &regState) {
-    emit registerState(this, regState);
+void SAccount::onRegState(OnRegStateParam &registrationState) {
+    emit registerState(this, registrationState);
 }

@@ -3,5 +3,6 @@
         <file>icons/call-start.svg</file>
         <file>icons/chat-start.svg</file>
         <file>icons/contact-new.svg</file>
+        <file>sounds/ringing-phone.wav</file>
     </qresource>
 </RCC>
