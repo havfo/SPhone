@@ -1,7 +1,6 @@
 #include "accountmanager.h"
 
-AccountManager::AccountManager(QWidget *parent) {
-    this->parent = parent;
+AccountManager::AccountManager() {
 }
 
 bool AccountManager::addAccount(SAccount *account) {

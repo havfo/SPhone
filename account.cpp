@@ -1,11 +1,10 @@
 #include "account.h"
 
 SAccount::SAccount() {
-
 }
 
 void SAccount::onIncomingCall(OnIncomingCallParam &incomingCall) {
-
+    emit callIncoming(this, incomingCall);
 }
 
 void SAccount::onRegStarted(OnRegStartedParam &regStarted) {
@@ -33,5 +32,5 @@ void SAccount::onMwiInfo(OnMwiInfoParam &mwiInfo) {
 }
 
 void SAccount::onRegState(OnRegStateParam &regState) {
-
+    emit registerState(this, regState);
 }

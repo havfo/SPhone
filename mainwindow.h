@@ -1,11 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <iostream>
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QCloseEvent>
 #include "accountmanager.h"
 #include "preferences.h"
+
+using namespace pj;
 
 namespace Ui {
 class MainWindow;
@@ -20,7 +23,6 @@ protected:
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void onIncomingCall(OnIncomingCallParam &incomingCall);
 
 private:
     Ui::MainWindow *ui;
@@ -29,10 +31,12 @@ private:
     QList<Buddy *> buddies;
     TransportId tID;
     Preferences *p;
+
     void startApplication();
     void loadSettings();
     void saveSettings();
     bool reallyExit();
+    void addAccounts();
 
 private slots:
     void on_call_button_clicked();
@@ -47,6 +51,9 @@ private slots:
     void on_addcontact_button_clicked();
     void on_backtocontacts_button_clicked();
 
+    // Slots for signals from accounts
+    void onIncomingCall(SAccount *account, OnIncomingCallParam &incomingCall);
+    void onAccountRegisterState(SAccount *account, OnRegStateParam &regState);
 };
 
 #endif // MAINWINDOW_H

@@ -1,11 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <iostream>
-
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     startApplication();
+    addAccounts();
 }
 
 MainWindow::~MainWindow() {
@@ -32,11 +31,38 @@ void MainWindow::startApplication() {
         std::cout << "Startup error: " << err.info() << std::endl;
     }
 
-    am = new AccountManager(this);
+    am = new AccountManager();
 }
 
-void MainWindow::onIncomingCall(OnIncomingCallParam &incomingCall) {
+void MainWindow::onIncomingCall(SAccount *account, OnIncomingCallParam &incomingCall) {
+    std::cout << "Incoming call!" << std::endl;
+}
 
+void MainWindow::onAccountRegisterState(SAccount *account, OnRegStateParam &regState) {
+    AccountInfo ai = account->getInfo();
+    std::cout << (ai.regIsActive? "*** Register: code=" : "*** Unregister: code=")
+                 << regState.code << std::endl;
+}
+
+void MainWindow::addAccounts() {
+    AccountConfig acc_cfg;
+    acc_cfg.idUri = "sip:test@example.com";
+    acc_cfg.regConfig.registrarUri = "sip:example.com";
+    acc_cfg.sipConfig.proxies.push_back("sip:xxx.example.com");
+    acc_cfg.sipConfig.authCreds.push_back( AuthCredInfo("digest", "*", "username", 0, "password") );
+
+    SAccount *acc = new SAccount;
+
+    try {
+        acc->create(acc_cfg);
+
+        QObject::connect(acc, &SAccount::callIncoming, this, &MainWindow::onIncomingCall);
+        QObject::connect(acc, &SAccount::registerState, this, &MainWindow::onAccountRegisterState);
+
+        am->addAccount(acc);
+    } catch(Error& err) {
+        std::cout << "Account creation error: " << err.info() << std::endl;
+    }
 }
 
 void MainWindow::on_call_button_clicked() {

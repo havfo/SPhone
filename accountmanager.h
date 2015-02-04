@@ -9,7 +9,7 @@
 class AccountManager {
 
 public:
-    AccountManager(QWidget *parent = 0);
+    AccountManager();
     bool addAccount(SAccount *account);
     SAccount* getAccount(int id);
     SAccount* getAccount(QString sipUri);
@@ -18,7 +18,6 @@ public:
 
 private:
     QList<SAccount *> accounts;
-    QWidget *parent;
 
 };
 
