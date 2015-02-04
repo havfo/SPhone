@@ -3,6 +3,7 @@
 
 #include <QList>
 #include <QString>
+#include <QWidget>
 #include "account.h"
 
 class AccountManager {

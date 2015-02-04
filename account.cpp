@@ -1,5 +1,4 @@
 #include "account.h"
-#include "mainwindow.h"
 
 SAccount::SAccount() {
 
