@@ -2,21 +2,35 @@
 #define CALLWINDOW_H
 
 #include <QDialog>
+#include <QList>
+#include "buddy.h"
+#include "call.h"
+#include "sbuddylistmodel.h"
+#include "buddysessionwidget.h"
 
 namespace Ui {
-class callWindow;
+class CallWindow;
 }
 
-class callWindow : public QDialog
-{
+class CallWindow : public QDialog {
     Q_OBJECT
 
 public:
-    explicit callWindow(QWidget *parent = 0);
-    ~callWindow();
+    explicit CallWindow(QWidget *parent = 0);
+    ~CallWindow();
+    void addBuddyToChat(SBuddy *buddy);
+    void addBuddyToCall(SBuddy *buddy);
 
 private:
-    Ui::callWindow *ui;
+    Ui::CallWindow *ui;
+    QList<SBuddy *> buddies;
+    QList<SCall *> calls;
+    SBuddyListModel *buddiesListModel;
+    QList<BuddySessionWidget *> buddySessions;
+    int currentBuddy;
+
+private slots:
+    void on_buddyList_clicked(const QModelIndex &index);
 };
 
 #endif // CALLWINDOW_H
