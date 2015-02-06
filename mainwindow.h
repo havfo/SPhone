@@ -6,8 +6,11 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 #include <QSettings>
+#include "buddy.h"
 #include "accountmanager.h"
 #include "preferences.h"
+#include "callwindow.h"
+#include "sbuddylistmodel.h"
 
 using namespace pj;
 
@@ -27,11 +30,13 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    SBuddyListModel *buddyListModel;
     AccountManager *am;
     Endpoint *ep;
-    QList<Buddy *> buddies;
+    QList<SBuddy *> buddies;
     TransportId tID;
     Preferences *p;
+    CallWindow *c;
 
     int logLevel;
     int udpPort;
@@ -46,6 +51,7 @@ private:
     bool reallyExit();
     void addAccounts();
     void loadAccountSettings();
+    void startConversation();
 
 private slots:
     void on_call_button_clicked();
@@ -69,6 +75,8 @@ private slots:
     void onInstantMessageStatus(SAccount *account, const OnInstantMessageStatusParam &instantMessageStatus);
     void onTypingIndication(SAccount *account, const OnTypingIndicationParam &typingIndication);
     void onMwiInfo(SAccount *account, const OnMwiInfoParam &mwiInfo);
+    void on_buddyList_clicked(const QModelIndex &index);
+    void on_buddyList_doubleClicked(const QModelIndex &index);
 };
 
 #endif // MAINWINDOW_H

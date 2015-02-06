@@ -4,6 +4,13 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+
+    buddyListModel = new SBuddyListModel(buddies);
+    this->ui->buddyList->setModel(buddyListModel);
+
+    this->ui->call_button->setEnabled(false);
+    this->ui->chat_button->setEnabled(false);
+
     startApplication();
 }
 
@@ -48,6 +55,8 @@ void MainWindow::startApplication() {
     am = new AccountManager();
 
     addAccounts();
+
+    startConversation();
 }
 
 void MainWindow::loadSettings() {
@@ -71,12 +80,20 @@ void MainWindow::loadAccountSettings() {
 
 }
 
+void MainWindow::startConversation() {
+    c = new CallWindow(this);
+
+    c->show();
+}
+
 void MainWindow::saveSettings() {
 
 }
 
 void MainWindow::onIncomingCall(SAccount *account, const OnIncomingCallParam &incomingCall) {
     std::cout << "Incoming call!" << std::endl;
+
+    // If callwindow not open, open it and let in handle it
 }
 
 void MainWindow::onRegState(SAccount *account, const OnRegStateParam &registrationState) {
@@ -94,7 +111,7 @@ void MainWindow::onIncomingSubscribe(SAccount *account, const OnIncomingSubscrib
 }
 
 void MainWindow::onInstantMessage(SAccount *account, const OnInstantMessageParam &instantMessage) {
-
+    // Check if FROM field exists in buddy list
 }
 
 void MainWindow::onInstantMessageStatus(SAccount *account, const OnInstantMessageStatusParam &instantMessageStatus) {
@@ -227,4 +244,15 @@ void MainWindow::on_addcontact_button_clicked() {
 
 void MainWindow::on_backtocontacts_button_clicked() {
     ui->stackedWidget->setCurrentIndex(0);
+}
+
+// Selected a buddy
+void MainWindow::on_buddyList_clicked(const QModelIndex &index) {
+    this->ui->call_button->setEnabled(true);
+    this->ui->chat_button->setEnabled(true);
+}
+
+// Double clicked a buddy
+void MainWindow::on_buddyList_doubleClicked(const QModelIndex &index) {
+    // Find buddy and start call window
 }

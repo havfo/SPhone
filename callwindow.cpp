@@ -4,19 +4,31 @@
 CallWindow::CallWindow(QWidget *parent) : QDialog(parent), ui(new Ui::CallWindow) {
     ui->setupUi(this);
 
-    buddiesListModel = new SBuddyListModel(buddies);
-    this->ui->buddyList->setModel(buddiesListModel);
+    buddyListModel = new SBuddyListModel(buddies);
+    this->ui->buddyList->setModel(buddyListModel);
 }
 
 CallWindow::~CallWindow() {
     delete ui;
 }
 
-void CallWindow::addBuddyToChat(SBuddy *buddy) {
+void CallWindow::incomingCallFromBuddy(SBuddy *buddy, const OnIncomingCallParam &incomingCall) {
 
 }
 
-void CallWindow::addBuddyToCall(SBuddy *buddy) {
+void CallWindow::incomingChatFromBuddy(SBuddy *buddy, const OnInstantMessageParam &instantMessage) {
+
+}
+
+void CallWindow::outgoingCallToBuddy(SBuddy *buddy) {
+
+}
+
+void CallWindow::outgoingChatToBuddy(SBuddy *buddy) {
+
+}
+
+void CallWindow::incomingTypingIndication(SBuddy *buddy, const OnTypingIndicationParam &typingIndication) {
 
 }
 

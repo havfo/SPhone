@@ -111,7 +111,7 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="QListView" name="contactList"/>
+         <widget class="QListView" name="buddyList"/>
         </item>
        </layout>
       </widget>
