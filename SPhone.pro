@@ -18,19 +18,22 @@ SOURCES += main.cpp\
     accountmanager.cpp \
     buddy.cpp \
     preferences.cpp \
-    accountwizard.cpp
+    accountwizard.cpp \
+    callwindow.cpp
 
 HEADERS  += mainwindow.h \
     account.h \
     accountmanager.h \
     buddy.h \
     preferences.h \
-    accountwizard.h
+    accountwizard.h \
+    callwindow.h
 
 FORMS    += resources/mainwindow.ui \
     resources/preferences.ui \
     resources/preferences.ui \
-    resources/accountwizard.ui
+    resources/accountwizard.ui \
+    resources/callwindow.ui
 
 RESOURCES += \
     resources/resources.qrc

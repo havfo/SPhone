@@ -26,6 +26,12 @@ private slots:
 signals:
     void callIncoming(SAccount *, const OnIncomingCallParam &);
     void registerState(SAccount *, const OnRegStateParam &);
+    void registerStarted(SAccount *, const OnRegStartedParam &regStarted);
+    void subscribeIncoming(SAccount *, const OnIncomingSubscribeParam &subscribe);
+    void instantMessageIncoming(SAccount *, const OnInstantMessageParam &instantMessage);
+    void incomingMessageStatus(SAccount *, const OnInstantMessageStatusParam &instantMessageStatus);
+    void incomingTypingIndication(SAccount *, const OnTypingIndicationParam &typingIndication);
+    void incomingMwiInfo(SAccount *, const OnMwiInfoParam &mwiInfo);
 };
 
 #endif // ACCOUNT_H

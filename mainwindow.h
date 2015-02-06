@@ -63,6 +63,12 @@ private slots:
     // Slots for signals from accounts
     void onIncomingCall(SAccount *account, const OnIncomingCallParam &incomingCall);
     void onRegState(SAccount *account, const OnRegStateParam &registrationState);
+    void onRegStarted(SAccount *account, const OnRegStartedParam &regStarted);
+    void onIncomingSubscribe(SAccount *account, const OnIncomingSubscribeParam &subscribe);
+    void onInstantMessage(SAccount *account, const OnInstantMessageParam &instantMessage);
+    void onInstantMessageStatus(SAccount *account, const OnInstantMessageStatusParam &instantMessageStatus);
+    void onTypingIndication(SAccount *account, const OnTypingIndicationParam &typingIndication);
+    void onMwiInfo(SAccount *account, const OnMwiInfoParam &mwiInfo);
 };
 
 #endif // MAINWINDOW_H
