@@ -11,6 +11,7 @@
 #include "preferences.h"
 #include "callwindow.h"
 #include "sbuddylistmodel.h"
+#include "newbuddydialog.h"
 
 using namespace pj;
 
@@ -37,6 +38,7 @@ private:
     TransportId tID;
     Preferences *p;
     CallWindow *c;
+    NewBuddyDialog *nb;
 
     int logLevel;
     int udpPort;
@@ -77,6 +79,7 @@ private slots:
     void onMwiInfo(SAccount *account, const OnMwiInfoParam &mwiInfo);
     void on_buddyList_clicked(const QModelIndex &index);
     void on_buddyList_doubleClicked(const QModelIndex &index);
+    void on_newContact_button_clicked();
 };
 
 #endif // MAINWINDOW_H

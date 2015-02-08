@@ -171,6 +171,16 @@ void MainWindow::on_chat_button_clicked() {
 
 }
 
+void MainWindow::on_newContact_button_clicked() {
+    nb = new NewBuddyDialog(this);
+
+    int returnCode = nb->exec();
+
+    if (returnCode == QDialog::Accepted) {
+        // Add new buddy
+    }
+}
+
 void MainWindow::on_searchBox_textEdited(const QString &searchString) {
     // std::cout << "String typed: " << searchString.toStdString() << std::endl;
 
@@ -205,7 +215,6 @@ void MainWindow::on_preferences_action_triggered() {
     int returnCode = p->exec();
 
     if (returnCode == QDialog::Accepted) {
-
         // Do some setting up of account stuff
     }
 }

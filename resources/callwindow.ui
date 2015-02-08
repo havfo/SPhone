@@ -43,24 +43,10 @@
     </widget>
    </item>
    <item>
-    <widget class="BuddySessionWidget" name="buddySession" native="true">
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-     </layout>
+    <widget class="QStackedWidget" name="stackedWidget">
+     <widget class="BuddySessionWidget" name="buddySession">
+      <layout class="QVBoxLayout" name="verticalLayout"/>
+     </widget>
     </widget>
    </item>
   </layout>
