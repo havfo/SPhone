@@ -34,3 +34,12 @@ void SAccount::onMwiInfo(OnMwiInfoParam &mwiInfo) {
 void SAccount::onRegState(OnRegStateParam &registrationState) {
     emit registerState(this, registrationState);
 }
+
+QString SAccount::getDisplayName() const {
+    return displayName;
+}
+
+void SAccount::setDisplayName(const QString &displayName) {
+    this->displayName = displayName;
+}
+

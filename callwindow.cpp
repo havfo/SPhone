@@ -12,19 +12,19 @@ CallWindow::~CallWindow() {
     delete ui;
 }
 
-void CallWindow::incomingCallFromBuddy(SBuddy *buddy, const OnIncomingCallParam &incomingCall) {
+void CallWindow::incomingCallFromBuddy(SAccount *account, const OnIncomingCallParam &incomingCall) {
 
 }
 
-void CallWindow::incomingChatFromBuddy(SBuddy *buddy, const OnInstantMessageParam &instantMessage) {
+void CallWindow::incomingChatFromBuddy(SAccount *account, const OnInstantMessageParam &instantMessage) {
 
 }
 
-void CallWindow::outgoingCallToBuddy(SBuddy *buddy) {
+void CallWindow::outgoingCallToAddress(SAccount *account, QString *sipAddress) {
 
 }
 
-void CallWindow::outgoingChatToBuddy(SBuddy *buddy) {
+void CallWindow::outgoingChatToBuddy(SAccount *account, QString *sipAddress) {
 
 }
 

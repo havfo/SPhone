@@ -20,11 +20,12 @@ class CallWindow : public QDialog {
 public:
     explicit CallWindow(QWidget *parent = 0);
     ~CallWindow();
-    void incomingCallFromBuddy(SBuddy *buddy, const OnIncomingCallParam &incomingCall);
-    void incomingChatFromBuddy(SBuddy *buddy, const OnInstantMessageParam &instantMessage);
-    void outgoingCallToBuddy(SBuddy *buddy);
-    void outgoingChatToBuddy(SBuddy *buddy);
-    void incomingTypingIndication(SBuddy *buddy, const OnTypingIndicationParam &typingIndication);
+    void incomingCallFromBuddy(SAccount *account, const OnIncomingCallParam &incomingCall);
+    void incomingChatFromBuddy(SAccount *account, const OnInstantMessageParam &instantMessage);
+    void outgoingCallToBuddy(SAccount *account, QString *sipAddress);
+    void outgoingChatToBuddy(SAccount *account, QString *sipAddress);
+    void incomingTypingIndication(SAccount *account, const OnTypingIndicationParam &typingIndication);
+    void setAccount(SAccount *value);
 
 private:
     Ui::CallWindow *ui;

@@ -8,6 +8,7 @@
 #include <QScrollBar>
 #include "buddy.h"
 #include "call.h"
+#include "account.h"
 
 namespace Ui {
 class BuddySessionWidget;
@@ -19,6 +20,8 @@ class BuddySessionWidget : public QWidget {
 public:
     explicit BuddySessionWidget(QWidget *parent = 0);
     ~BuddySessionWidget();
+    void setBuddy(SBuddy *buddy);
+    void setAccount(SAccount *account);
 
 private slots:
     void on_chatButton_clicked();
@@ -32,6 +35,7 @@ private:
     QTextTableFormat tableFormat;
     void appendMessage(const QString &message);
     SBuddy *buddy;
+    SAccount *account;
 };
 
 #endif // BUDDYSESSIONWIDGET_H

@@ -12,6 +12,8 @@ class SAccount : public QObject, public Account {
 
 public:
     SAccount();
+    QString getDisplayName() const;
+    void setDisplayName(const QString &displayName);
 
 private slots:
     virtual void onIncomingCall(OnIncomingCallParam &incomingCall);
@@ -32,6 +34,9 @@ signals:
     void incomingMessageStatus(SAccount *, const OnInstantMessageStatusParam &instantMessageStatus);
     void incomingTypingIndication(SAccount *, const OnTypingIndicationParam &typingIndication);
     void incomingMwiInfo(SAccount *, const OnMwiInfoParam &mwiInfo);
+
+private:
+    QString displayName;
 };
 
 #endif // ACCOUNT_H

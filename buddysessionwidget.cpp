@@ -21,11 +21,20 @@ void BuddySessionWidget::appendMessage(const QString &message) {
      QTextCursor cursor(this->ui->chattedText->textCursor());
      cursor.movePosition(QTextCursor::End);
      QTextTable *table = cursor.insertTable(1, 2, tableFormat);
-     table->cellAt(0, 0).firstCursorPosition().insertText(" <CurrentBuddy> ");
+     table->cellAt(0, 0).firstCursorPosition().insertText(" < " + account->getDisplayName() + " > ");
      table->cellAt(0, 1).firstCursorPosition().insertText(message);
      QScrollBar *bar = this->ui->chattedText->verticalScrollBar();
      bar->setValue(bar->maximum());
 }
+
+void BuddySessionWidget::setAccount(SAccount *account) {
+    this->account = account;
+}
+
+void BuddySessionWidget::setBuddy(SBuddy *buddy) {
+    this->buddy = buddy;
+}
+
 
 // Switch to chat view
 void BuddySessionWidget::on_chatButton_clicked() {
