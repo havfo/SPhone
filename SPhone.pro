@@ -19,11 +19,10 @@ SOURCES += main.cpp\
     buddy.cpp \
     preferences.cpp \
     accountwizard.cpp \
-    callwindow.cpp \
     call.cpp \
     sbuddylistmodel.cpp \
-    buddysessionwidget.cpp \
-    newbuddydialog.cpp
+    newbuddydialog.cpp \
+    chatwindow.cpp
 
 HEADERS  += mainwindow.h \
     account.h \
@@ -31,19 +30,17 @@ HEADERS  += mainwindow.h \
     buddy.h \
     preferences.h \
     accountwizard.h \
-    callwindow.h \
     call.h \
     sbuddylistmodel.h \
-    buddysessionwidget.h \
-    newbuddydialog.h
+    newbuddydialog.h \
+    chatwindow.h
 
 FORMS    += resources/mainwindow.ui \
     resources/preferences.ui \
     resources/preferences.ui \
     resources/accountwizard.ui \
-    resources/callwindow.ui \
-    resources/buddysessionwidget.ui \
-    resources/newbuddydialog.ui
+    resources/newbuddydialog.ui \
+    resources/chatwindow.ui
 
 RESOURCES += \
     resources/resources.qrc

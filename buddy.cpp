@@ -8,3 +8,11 @@ SBuddy::SBuddy(SAccount *account) {
 void SBuddy::onBuddyState() {
 
 }
+
+bool SBuddy::getChatWindowOpen() const {
+    return chatWindowOpen;
+}
+
+void SBuddy::setChatWindowOpen(bool value) {
+    chatWindowOpen = value;
+}

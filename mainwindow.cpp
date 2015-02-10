@@ -81,7 +81,7 @@ void MainWindow::loadAccountSettings() {
 }
 
 void MainWindow::startConversation() {
-    c = new CallWindow(this);
+    c = new ChatWindow(this);
 
     c->show();
 }
@@ -164,7 +164,30 @@ void MainWindow::addAccounts() {
 }
 
 void MainWindow::on_call_button_clicked() {
+    // Check what is selected
+    if (!this->ui->searchBox->text().trimmed().isEmpty()) {
+        // There has been typed something, try calling to it
 
+        QString sipAddressRegExp = "\\bsip:[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b";
+        QRegExp rx(sipAddressRegExp);
+
+        QString sipAddress = this->ui->searchBox->text();
+
+        if (rx.exactMatch(sipAddress)) {
+            // Full SIP URI
+
+        } else if (rx.exactMatch("sip:" + sipAddress)) {
+            sipAddress = "sip:" + sipAddress;
+            // Now full SIP URI
+
+        } else {
+            QMessageBox ret;
+            ret.setText("Invalid SIP Address");
+            ret.exec();
+
+            return;
+        }
+    }
 }
 
 void MainWindow::on_chat_button_clicked() {
@@ -186,6 +209,12 @@ void MainWindow::on_searchBox_textEdited(const QString &searchString) {
 
     if (!searchString.trimmed().isEmpty() && ui->stackedWidget->currentIndex() != 1) {
         ui->stackedWidget->setCurrentIndex(1);
+        this->ui->call_button->setEnabled(true);
+        this->ui->chat_button->setEnabled(true);
+    } else {
+        ui->stackedWidget->setCurrentIndex(0);
+        this->ui->call_button->setEnabled(false);
+        this->ui->chat_button->setEnabled(false);
     }
 }
 
@@ -203,6 +232,29 @@ void MainWindow::on_userAvatar_clicked() {
 
 void MainWindow::on_accountSelector_currentIndexChanged(int index) {
 
+}
+
+void MainWindow::on_addcontact_button_clicked() {
+
+}
+
+void MainWindow::on_backtocontacts_button_clicked() {
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+// Selected a buddy
+void MainWindow::on_buddyList_clicked(const QModelIndex &index) {
+    this->ui->call_button->setEnabled(true);
+    this->ui->chat_button->setEnabled(true);
+}
+
+// Double clicked a buddy
+void MainWindow::on_buddyList_doubleClicked(const QModelIndex &index) {
+    // Find buddy and start call window
+}
+
+void MainWindow::on_backtocontacts2_button_clicked() {
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
 void MainWindow::on_quit_action_triggered() {
@@ -245,23 +297,4 @@ bool MainWindow::reallyExit() {
     } else {
         return false;
     }
-}
-
-void MainWindow::on_addcontact_button_clicked() {
-
-}
-
-void MainWindow::on_backtocontacts_button_clicked() {
-    ui->stackedWidget->setCurrentIndex(0);
-}
-
-// Selected a buddy
-void MainWindow::on_buddyList_clicked(const QModelIndex &index) {
-    this->ui->call_button->setEnabled(true);
-    this->ui->chat_button->setEnabled(true);
-}
-
-// Double clicked a buddy
-void MainWindow::on_buddyList_doubleClicked(const QModelIndex &index) {
-    // Find buddy and start call window
 }

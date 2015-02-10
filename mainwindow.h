@@ -6,10 +6,12 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 #include <QSettings>
+#include <QRegExp>
 #include "buddy.h"
+#include "call.h"
 #include "accountmanager.h"
 #include "preferences.h"
-#include "callwindow.h"
+#include "chatwindow.h"
 #include "sbuddylistmodel.h"
 #include "newbuddydialog.h"
 
@@ -35,9 +37,10 @@ private:
     AccountManager *am;
     Endpoint *ep;
     QList<SBuddy *> buddies;
+    QList<SCall *> calls;
     TransportId tID;
     Preferences *p;
-    CallWindow *c;
+    ChatWindow *c;
     NewBuddyDialog *nb;
 
     int logLevel;
@@ -80,6 +83,7 @@ private slots:
     void on_buddyList_clicked(const QModelIndex &index);
     void on_buddyList_doubleClicked(const QModelIndex &index);
     void on_newContact_button_clicked();
+    void on_backtocontacts2_button_clicked();
 };
 
 #endif // MAINWINDOW_H
