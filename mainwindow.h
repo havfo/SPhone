@@ -7,6 +7,7 @@
 #include <QCloseEvent>
 #include <QSettings>
 #include <QRegExp>
+#include <QMutex>
 #include "buddy.h"
 #include "call.h"
 #include "accountmanager.h"
@@ -42,6 +43,7 @@ private:
     Preferences *p;
     ChatWindow *c;
     NewBuddyDialog *nb;
+    QMutex activeCallsMutex;
 
     int logLevel;
     int udpPort;
@@ -74,12 +76,8 @@ private slots:
     // Slots for signals from accounts
     void onIncomingCall(SAccount *account, const OnIncomingCallParam &incomingCall);
     void onRegState(SAccount *account, const OnRegStateParam &registrationState);
-    void onRegStarted(SAccount *account, const OnRegStartedParam &regStarted);
-    void onIncomingSubscribe(SAccount *account, const OnIncomingSubscribeParam &subscribe);
     void onInstantMessage(SAccount *account, const OnInstantMessageParam &instantMessage);
-    void onInstantMessageStatus(SAccount *account, const OnInstantMessageStatusParam &instantMessageStatus);
     void onTypingIndication(SAccount *account, const OnTypingIndicationParam &typingIndication);
-    void onMwiInfo(SAccount *account, const OnMwiInfoParam &mwiInfo);
     void on_buddyList_clicked(const QModelIndex &index);
     void on_buddyList_doubleClicked(const QModelIndex &index);
     void on_newContact_button_clicked();

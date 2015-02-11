@@ -2,6 +2,7 @@
 #define BUDDY_H
 
 #include <pjsua2.hpp>
+#include <QString>
 #include "account.h"
 
 using namespace pj;
@@ -15,9 +16,13 @@ public:
     bool getChatWindowOpen() const;
     void setChatWindowOpen(bool value);
 
+    QString getDisplayName() const;
+    void setDisplayName(const QString &value);
+
 private:
     SAccount *account;
     bool chatWindowOpen;
+    QString displayName;
 };
 
 #endif // BUDDY_H

@@ -4,6 +4,10 @@
 #include <QDialog>
 #include <QList>
 #include <QCloseEvent>
+#include <QTextTable>
+#include <QTextTableFormat>
+#include <QTextCursor>
+#include <QScrollBar>
 #include <pjsua2.hpp>
 #include "account.h"
 #include "buddy.h"
@@ -31,11 +35,14 @@ private:
     Ui::ChatWindow *ui;
     SAccount *account;
     SBuddy *buddy;
+    QTextTableFormat tableFormat;
+    void appendMessage(const QString &message);
 
 private slots:
     void onInstantMessage(const OnInstantMessageParam &instantMessage);
     void onInstantMessageStatus(const OnInstantMessageStatusParam &instantMessageStatus);
     void onTypingIndication(const OnTypingIndicationParam &typingIndication);
+    void on_chatInput_returnPressed();
 };
 
 #endif // CALLWINDOW_H

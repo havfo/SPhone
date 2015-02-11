@@ -102,27 +102,11 @@ void MainWindow::onRegState(SAccount *account, const OnRegStateParam &registrati
               << registrationState.code << std::endl;
 }
 
-void MainWindow::onRegStarted(SAccount *account, const OnRegStartedParam &regStarted) {
-
-}
-
-void MainWindow::onIncomingSubscribe(SAccount *account, const OnIncomingSubscribeParam &subscribe) {
-
-}
-
 void MainWindow::onInstantMessage(SAccount *account, const OnInstantMessageParam &instantMessage) {
     // Check if FROM field exists in buddy list
 }
 
-void MainWindow::onInstantMessageStatus(SAccount *account, const OnInstantMessageStatusParam &instantMessageStatus) {
-
-}
-
 void MainWindow::onTypingIndication(SAccount *account, const OnTypingIndicationParam &typingIndication) {
-
-}
-
-void MainWindow::onMwiInfo(SAccount *account, const OnMwiInfoParam &mwiInfo) {
 
 }
 
@@ -140,22 +124,14 @@ void MainWindow::addAccounts() {
 
         qRegisterMetaType<OnIncomingCallParam>("OnIncomingCallParam");
         qRegisterMetaType<OnRegStateParam>("OnRegStateParam");
-        qRegisterMetaType<OnRegStartedParam>("OnRegStartedParam");
-        qRegisterMetaType<OnIncomingSubscribeParam>("OnIncomingSubscribeParam");
         qRegisterMetaType<OnInstantMessageParam>("OnInstantMessageParam");
-        qRegisterMetaType<OnInstantMessageStatusParam>("OnInstantMessageStatusParam");
         qRegisterMetaType<OnTypingIndicationParam>("OnTypingIndicationParam");
-        qRegisterMetaType<OnMwiInfoParam>("OnMwiInfoParam");
 
 
         QObject::connect(acc, &SAccount::callIncoming, this, &MainWindow::onIncomingCall);
         QObject::connect(acc, &SAccount::registerState, this, &MainWindow::onRegState);
-        QObject::connect(acc, &SAccount::registerStarted, this, &MainWindow::onRegStarted);
-        QObject::connect(acc, &SAccount::subscribeIncoming, this, &MainWindow::onIncomingSubscribe);
         QObject::connect(acc, &SAccount::instantMessageIncoming, this, &MainWindow::onInstantMessage);
-        QObject::connect(acc, &SAccount::incomingMessageStatus, this, &MainWindow::onInstantMessageStatus);
         QObject::connect(acc, &SAccount::incomingTypingIndication, this, &MainWindow::onTypingIndication);
-        QObject::connect(acc, &SAccount::incomingMwiInfo, this, &MainWindow::onMwiInfo);
 
         am->addAccount(acc);
     } catch(Error& err) {
@@ -187,6 +163,18 @@ void MainWindow::on_call_button_clicked() {
 
             return;
         }
+
+        activeCallsMutex.lock();
+
+        // Check if we are in a call
+        if (!calls.empty()) {
+            activeCallsMutex.unlock();
+            return;
+        }
+
+
+
+        activeCallsMutex.unlock();
     }
 }
 
