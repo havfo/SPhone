@@ -93,7 +93,7 @@ void MainWindow::saveSettings() {
 void MainWindow::onIncomingCall(SAccount *account, const OnIncomingCallParam &incomingCall) {
     std::cout << "Incoming call!" << std::endl;
 
-    // If callwindow not open, open it and let in handle it
+
 }
 
 void MainWindow::onRegState(SAccount *account, const OnRegStateParam &registrationState) {
@@ -107,7 +107,7 @@ void MainWindow::onInstantMessage(SAccount *account, const OnInstantMessageParam
 }
 
 void MainWindow::onTypingIndication(SAccount *account, const OnTypingIndicationParam &typingIndication) {
-
+    // Check if FROM field exists in buddy list
 }
 
 void MainWindow::addAccounts() {
