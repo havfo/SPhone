@@ -4,6 +4,7 @@
 #include <iostream>
 #include <pjsua2.hpp>
 #include <QObject>
+#include "call.h"
 
 using namespace pj;
 
@@ -17,15 +18,11 @@ public:
 
 private slots:
     virtual void onIncomingCall(OnIncomingCallParam &incomingCall);
-    virtual void onIncomingSubscribe(OnIncomingSubscribeParam &subscribe);
     virtual void onInstantMessage(OnInstantMessageParam &instantMessage);
     virtual void onTypingIndication(OnTypingIndicationParam &typingIndication);
-    virtual void onRegState(OnRegStateParam &registrationState);
 
 signals:
-    void callIncoming(SAccount *, const OnIncomingCallParam &);
-    void registerState(SAccount *, const OnRegStateParam &);
-    void subscribeIncoming(SAccount *, const OnIncomingSubscribeParam &);
+    void callIncoming(SAccount *, SCall *);
     void instantMessageIncoming(SAccount *, const OnInstantMessageParam &);
     void incomingTypingIndication(SAccount *, const OnTypingIndicationParam &typingIndication);
 

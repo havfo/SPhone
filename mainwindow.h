@@ -9,12 +9,12 @@
 #include <QRegExp>
 #include <QMutex>
 #include "buddy.h"
-#include "call.h"
 #include "accountmanager.h"
 #include "preferences.h"
 #include "chatwindow.h"
 #include "sbuddylistmodel.h"
 #include "newbuddydialog.h"
+#include "callwindow.h"
 
 using namespace pj;
 
@@ -38,12 +38,11 @@ private:
     AccountManager *am;
     Endpoint *ep;
     QList<SBuddy *> buddies;
-    QList<SCall *> calls;
     TransportId tID;
     Preferences *p;
-    ChatWindow *c;
+    ChatWindow *chatWin;
     NewBuddyDialog *nb;
-    QMutex activeCallsMutex;
+    CallWindow *callWin;
 
     int logLevel;
     int udpPort;
@@ -72,16 +71,15 @@ private slots:
     void on_preferences_action_triggered();
     void on_addcontact_button_clicked();
     void on_backtocontacts_button_clicked();
-
-    // Slots for signals from accounts
-    void onIncomingCall(SAccount *account, const OnIncomingCallParam &incomingCall);
-    void onRegState(SAccount *account, const OnRegStateParam &registrationState);
-    void onInstantMessage(SAccount *account, const OnInstantMessageParam &instantMessage);
-    void onTypingIndication(SAccount *account, const OnTypingIndicationParam &typingIndication);
     void on_buddyList_clicked(const QModelIndex &index);
     void on_buddyList_doubleClicked(const QModelIndex &index);
     void on_newContact_button_clicked();
     void on_backtocontacts2_button_clicked();
+
+    // Slots for signals from accounts
+    void onIncomingCall(SAccount *account, SCall *call);
+    void onInstantMessage(SAccount *account, const OnInstantMessageParam &instantMessage);
+    void onTypingIndication(SAccount *account, const OnTypingIndicationParam &typingIndication);
 };
 
 #endif // MAINWINDOW_H

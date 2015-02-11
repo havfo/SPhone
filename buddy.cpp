@@ -16,13 +16,12 @@ bool SBuddy::getChatWindowOpen() const {
 void SBuddy::setChatWindowOpen(bool value) {
     chatWindowOpen = value;
 }
-QString SBuddy::getDisplayName() const
-{
+
+QString SBuddy::getDisplayName() const {
     return displayName;
 }
 
-void SBuddy::setDisplayName(const QString &value)
-{
+void SBuddy::setDisplayName(const QString &value) {
     displayName = value;
 }
 

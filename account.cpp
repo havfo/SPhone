@@ -4,11 +4,9 @@ SAccount::SAccount() {
 }
 
 void SAccount::onIncomingCall(OnIncomingCallParam &incomingCall) {
-    emit callIncoming(this, incomingCall);
-}
+    SCall *call = new SCall(*this, incomingCall.callId);
 
-void SAccount::onIncomingSubscribe(OnIncomingSubscribeParam &subscribe) {
-    emit subscribeIncoming(this, subscribe);
+    emit callIncoming(this, call);
 }
 
 void SAccount::onInstantMessage(OnInstantMessageParam &instantMessage) {
@@ -17,10 +15,6 @@ void SAccount::onInstantMessage(OnInstantMessageParam &instantMessage) {
 
 void SAccount::onTypingIndication(OnTypingIndicationParam &typingIndication) {
     emit incomingTypingIndication(this, typingIndication);
-}
-
-void SAccount::onRegState(OnRegStateParam &registrationState) {
-    emit registerState(this, registrationState);
 }
 
 QString SAccount::getDisplayName() const {

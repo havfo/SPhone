@@ -17,8 +17,10 @@ public:
 private slots:
     virtual void onCallState(OnCallStateParam &prm);
     virtual void onCallMediaState(OnCallMediaStateParam &prm);
-    virtual void onInstantMessage(OnInstantMessageParam &prm);
-    virtual void onTypingIndication(OnTypingIndicationParam &prm);
+
+signals:
+    void onCallStateSignal(const OnCallStateParam &);
+    void onCallMediaStateSignal(const OnCallMediaStateParam &);
 };
 
 #endif // CALL_H

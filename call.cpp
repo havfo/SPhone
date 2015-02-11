@@ -7,17 +7,9 @@ SCall::~SCall() {
 }
 
 void SCall::onCallState(OnCallStateParam &prm) {
-
+    emit onCallStateSignal(prm);
 }
 
 void SCall::onCallMediaState(OnCallMediaStateParam &prm) {
-
-}
-
-void SCall::onInstantMessage(OnInstantMessageParam &prm) {
-
-}
-
-void SCall::onTypingIndication(OnTypingIndicationParam &prm) {
-
+    emit onCallMediaStateSignal(prm);
 }

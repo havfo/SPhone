@@ -81,25 +81,30 @@ void MainWindow::loadAccountSettings() {
 }
 
 void MainWindow::startConversation() {
-    c = new ChatWindow(this);
+    chatWin = new ChatWindow(this);
 
-    c->show();
+    chatWin->show();
 }
 
 void MainWindow::saveSettings() {
 
 }
 
-void MainWindow::onIncomingCall(SAccount *account, const OnIncomingCallParam &incomingCall) {
+void MainWindow::onIncomingCall(SAccount *account, SCall *call) {
     std::cout << "Incoming call!" << std::endl;
 
+    if (callWin == NULL) { // We are not in a call
+        callWin = new CallWindow;
+        callWin->show();
 
-}
+        callWin->setCall(call);
+    } else { // We are inn a call
+        CallOpParam prm;
+        prm.statusCode = PJSIP_SC_DECLINE;
+        call->hangup(prm);
 
-void MainWindow::onRegState(SAccount *account, const OnRegStateParam &registrationState) {
-    AccountInfo ai = account->getInfo();
-    std::cout << (ai.regIsActive? "*** Register: code=" : "*** Unregister: code=")
-              << registrationState.code << std::endl;
+        delete call;
+    }
 }
 
 void MainWindow::onInstantMessage(SAccount *account, const OnInstantMessageParam &instantMessage) {
@@ -123,13 +128,11 @@ void MainWindow::addAccounts() {
         acc->create(acc_cfg);
 
         qRegisterMetaType<OnIncomingCallParam>("OnIncomingCallParam");
-        qRegisterMetaType<OnRegStateParam>("OnRegStateParam");
         qRegisterMetaType<OnInstantMessageParam>("OnInstantMessageParam");
         qRegisterMetaType<OnTypingIndicationParam>("OnTypingIndicationParam");
 
 
         QObject::connect(acc, &SAccount::callIncoming, this, &MainWindow::onIncomingCall);
-        QObject::connect(acc, &SAccount::registerState, this, &MainWindow::onRegState);
         QObject::connect(acc, &SAccount::instantMessageIncoming, this, &MainWindow::onInstantMessage);
         QObject::connect(acc, &SAccount::incomingTypingIndication, this, &MainWindow::onTypingIndication);
 
@@ -164,17 +167,7 @@ void MainWindow::on_call_button_clicked() {
             return;
         }
 
-        activeCallsMutex.lock();
 
-        // Check if we are in a call
-        if (!calls.empty()) {
-            activeCallsMutex.unlock();
-            return;
-        }
-
-
-
-        activeCallsMutex.unlock();
     }
 }
 

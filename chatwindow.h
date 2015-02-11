@@ -1,5 +1,5 @@
-#ifndef CALLWINDOW_H
-#define CALLWINDOW_H
+#ifndef CHATWINDOW_H
+#define CHATWINDOW_H
 
 #include <QDialog>
 #include <QList>
@@ -45,4 +45,4 @@ private slots:
     void on_chatInput_returnPressed();
 };
 
-#endif // CALLWINDOW_H
+#endif // CHATWINDOW_H
