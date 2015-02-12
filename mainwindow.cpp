@@ -60,7 +60,7 @@ void MainWindow::startApplication() {
 }
 
 void MainWindow::loadSettings() {
-    QSettings settings("SPhone", "SPhone");
+    QSettings settings(QString("config/config.ini"), QSettings::IniFormat);
 
     firstRun = (settings.value("first_run", "").toString().toStdString().empty());
 
@@ -93,7 +93,9 @@ void MainWindow::saveSettings() {
 void MainWindow::onIncomingCall(SAccount *account, SCall *call) {
     std::cout << "Incoming call!" << std::endl;
 
-    if (callWin == NULL) { // We are not in a call
+    if (callWin == NULL || !callWin->isVisible()) { // We are not in a call
+        delete callWin;
+
         callWin = new CallWindow;
         callWin->show();
 
@@ -116,8 +118,10 @@ void MainWindow::onTypingIndication(SAccount *account, const OnTypingIndicationP
 }
 
 void MainWindow::addAccounts() {
+    QSettings settings(QString("config/config.ini"), QSettings::IniFormat);
+
     AccountConfig acc_cfg;
-    acc_cfg.idUri = "sip:test@example.com";
+    acc_cfg.idUri = settings.value("sipURI", "").toString().toStdString();
     acc_cfg.regConfig.registrarUri = "sip:example.com";
     acc_cfg.sipConfig.proxies.push_back("sip:sip.example.com;transport=tls");
     acc_cfg.sipConfig.authCreds.push_back( AuthCredInfo("digest", "*", "test", 0, "password") );
