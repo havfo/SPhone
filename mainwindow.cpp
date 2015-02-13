@@ -56,7 +56,7 @@ void MainWindow::startApplication() {
 
     addAccounts();
 
-    startConversation();
+    // startConversation();
 }
 
 void MainWindow::loadSettings() {
@@ -93,13 +93,13 @@ void MainWindow::saveSettings() {
 void MainWindow::onIncomingCall(SAccount *account, SCall *call) {
     std::cout << "Incoming call!" << std::endl;
 
-    if (callWin == NULL || !callWin->isVisible()) { // We are not in a call
-        delete callWin;
+    if (callWin == NULL || !callWin->isBusy()) { // We are not in a call
+        // delete callWin;
 
         callWin = new CallWindow;
-        callWin->show();
-
         callWin->setCall(call);
+
+        callWin->show();
     } else { // We are inn a call
         CallOpParam prm;
         prm.statusCode = PJSIP_SC_DECLINE;
@@ -122,9 +122,9 @@ void MainWindow::addAccounts() {
 
     AccountConfig acc_cfg;
     acc_cfg.idUri = settings.value("sipURI", "").toString().toStdString();
-    acc_cfg.regConfig.registrarUri = "sip:example.com";
-    acc_cfg.sipConfig.proxies.push_back("sip:sip.example.com;transport=tls");
-    acc_cfg.sipConfig.authCreds.push_back( AuthCredInfo("digest", "*", "test", 0, "password") );
+    acc_cfg.regConfig.registrarUri = settings.value("registrarURI", "").toString().toStdString();
+    acc_cfg.sipConfig.proxies.push_back(settings.value("outboundProxy", "").toString().toStdString());
+    acc_cfg.sipConfig.authCreds.push_back( AuthCredInfo("digest", "*", settings.value("user", "").toString().toStdString(), 0, settings.value("password", "").toString().toStdString()) );
 
     SAccount *acc = new SAccount;
 

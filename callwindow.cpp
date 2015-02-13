@@ -44,7 +44,19 @@ void CallWindow::onCallState(const OnCallStateParam &callState) {
 }
 
 void CallWindow::onCallMediaState(const OnCallMediaStateParam &callMediaState) {
+    CallInfo ci = call->getInfo();
 
+    // Iterate all the call medias
+    for (unsigned i = 0; i < ci.media.size(); i++) {
+        if (ci.media[i].type==PJMEDIA_TYPE_AUDIO && call->getMedia(i)) {
+            AudioMedia *aud_med = (AudioMedia *)call->getMedia(i);
+
+            // Connect the call audio media to sound device
+            AudDevManager& mgr = Endpoint::instance().audDevManager();
+            aud_med->startTransmit(mgr.getPlaybackDevMedia());
+            mgr.getCaptureDevMedia().startTransmit(*aud_med);
+        }
+    }
 }
 
 void CallWindow::closeWindow() {
